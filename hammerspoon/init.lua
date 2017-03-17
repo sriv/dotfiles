@@ -2,7 +2,8 @@
 -- Set up
 -----------------------------------------------
 
-local hyper = {"cmd","alt", "ctrl"}
+local hyper = {"cmd", "alt", "ctrl"}
+spaces = require("hs._asm.undocumented.spaces")
 
 hs.window.animationDuration = 0
 
@@ -10,6 +11,11 @@ function show_alert(message)
     hs.alert.show("Hammerspoon: " .. message) 
 end
 
+function create_spaces(n)
+    for i=1,n-#spaces.query(spaces.allSpaces) do
+        spaces.createSpace()
+    end
+end
 -----------------------------------------------
 -- Reload config on write
 -----------------------------------------------
@@ -20,8 +26,10 @@ end
 hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reload_config):start()
 show_alert("Config loaded")
 
+-- WINDOW MANAGEMENT
+
 -----------------------------------------------
--- hyper d for left one half window
+-- hyper+d left one half window
 -----------------------------------------------
 
 hs.hotkey.bind(hyper, 'd', function()
@@ -42,7 +50,7 @@ hs.hotkey.bind(hyper, 'd', function()
 end)
 
 -----------------------------------------------
--- hyper g for right one half window
+-- hyper+g right one half window
 -----------------------------------------------
 
 hs.hotkey.bind(hyper, 'g', function()
@@ -63,7 +71,7 @@ hs.hotkey.bind(hyper, 'g', function()
 end)
 
 -----------------------------------------------
--- hyper f for fullscreen
+-- hyper+f max screen size
 -----------------------------------------------
 
 hs.hotkey.bind(hyper, 'f', function()
@@ -84,9 +92,11 @@ hs.hotkey.bind(hyper, 'f', function()
 end)
 
 -----------------------------------------------
--- Hyper i to show window hints
+-- hyper+i show window hints
 -----------------------------------------------
 
 hs.hotkey.bind(hyper, 'i', function()
     hs.hints.windowHints()
 end)
+
+create_spaces(4)

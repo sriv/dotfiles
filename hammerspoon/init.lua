@@ -37,7 +37,7 @@ hs.hotkey.bind(hyper, 'd', function()
         f.h = max.h
         win:setFrame(f)
     else
-        hs.alert.show("No active window")
+        show_alert("No active window")
     end
 end)
 
@@ -58,7 +58,7 @@ hs.hotkey.bind(hyper, 'g', function()
         f.h = max.h
         win:setFrame(f)
     else
-        hs.alert.show("No active window")
+        show_alert("No active window")
     end
 end)
 
@@ -79,6 +79,14 @@ hs.hotkey.bind(hyper, 'f', function()
         f.h = max.h
         win:setFrame(f)
     else
-        hs.alert.show("No active window")
+        show_alert("No active window")
     end
+end)
+
+-----------------------------------------------
+-- Hyper i to show window hints
+-----------------------------------------------
+
+hs.hotkey.bind(hyper, 'i', function()
+    hs.hints.windowHints()
 end)

@@ -99,4 +99,24 @@ hs.hotkey.bind(hyper, 'i', function()
     hs.hints.windowHints()
 end)
 
+--------------------------------------------------
+-- hyper+up,down,left,right to switch window focus
+--------------------------------------------------
+arrow_key_bindings = {
+    up = function() hs.window.focusedWindow():focusWindowNorth() end,
+    down = function() hs.window.focusedWindow():focusWindowSouth() end,
+    left = function() hs.window.focusedWindow():focusWindowWest() end,
+    right = function() hs.window.focusedWindow():focusWindowEast() end
+}
+
+for k, f in pairs(arrow_key_bindings) do
+    hs.hotkey.bind(hyper, k, function()
+        if hs.window.focusedWindow() then
+            f()
+        else
+            show_alert("No active window")
+        end
+    end)
+end
+
 create_spaces(4)

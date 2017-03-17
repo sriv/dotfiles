@@ -1,0 +1,24 @@
+- clean: ['~']
+
+- link:
+    ~/.profile:
+        path: profile
+        create: false
+        relink: false
+        force: false
+    ~/.bashrc:
+        path: bashrc
+        create: false
+        relink: false
+        force: false
+    ~/.gitconfig:
+        path: gitconfig
+        create: false
+        relink: false
+        force: false
+    ~/.hammerspoon:
+        path: hammerspoon
+        create: true
+        force: true
+
+

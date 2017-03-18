@@ -121,4 +121,26 @@ for k, f in pairs(arrow_key_bindings) do
     end)
 end
 
+-- WINDOW MANAGEMENT : Moving to Space
+
+--------------------------------------------------
+-- mod+shift+n move focussed window to Space n
+-- n <= number of spaces (default 4)
+-- I bind 1-9 number keys, but if above is false,
+-- there will be just an alert
+--------------------------------------------------
+for s = 1,9 do
+    hs.hotkey.bind({"alt", "cmd", "shift"}, tostring(s), function()
+        local win = hs.window.focusedWindow()
+        local win_spaces = win:screen():spaces()
+        if s > #win_spaces then
+            show_alert("Desktop "..s.." does not exist")
+        else
+            -- screens are in inverse order
+            -- Desktop 1 is at index n (when total n spaces exist)
+            local screen_id = win_spaces[#win_spaces-s+1]
+            spaces.moveWindowToSpace(win:id(), screen_id)
+        end
+    end)
+end
 create_spaces(4)

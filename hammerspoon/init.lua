@@ -121,7 +121,7 @@ for k, f in pairs(arrow_key_bindings) do
     end)
 end
 
--- WINDOW MANAGEMENT : Moving to Space
+-- WINDOW MANAGEMENT : Moving window to Space
 
 --------------------------------------------------
 -- mod+shift+n move focussed window to Space n
@@ -143,4 +143,27 @@ for s = 1,9 do
         end
     end)
 end
+
+-- WINDOW MANAGEMENT : Moving to Space
+
+--------------------------------------------------
+-- alt+n move focussed window to Space n
+-- n <= number of spaces (default 4)
+-- I bind 1-9 number keys, but if above is false,
+-- there will be just an alert
+--------------------------------------------------
+for s = 1,9 do
+    hs.hotkey.bind({"alt"}, tostring(s), function()
+        local screen_spaces = hs.screen.mainScreen():spaces()
+        if s > #screen_spaces then
+            show_alert("Desktop "..s.." does not exist")
+        else
+            -- screens are in inverse order
+            -- Desktop 1 is at index n (when total n spaces exist)
+            local screen_id = screen_spaces[#screen_spaces-s+1]
+            spaces.changeToSpace(screen_id, false)
+        end
+    end)
+end
+
 create_spaces(4)

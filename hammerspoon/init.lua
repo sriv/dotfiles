@@ -2,7 +2,7 @@
 -- Set up
 -----------------------------------------------
 
-local hyper = {"cmd", "alt", "ctrl"}
+local mod = {"alt", "ctrl"}
 spaces = require("hs._asm.undocumented.spaces")
 
 hs.window.animationDuration = 0
@@ -26,13 +26,13 @@ end
 hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reload_config):start()
 show_alert("Config loaded")
 
--- WINDOW MANAGEMENT
+-- WINDOW MANAGEMENT : Resizing
 
 -----------------------------------------------
--- hyper+d left one half window
+-- mod+d left one half window
 -----------------------------------------------
 
-hs.hotkey.bind(hyper, 'd', function()
+hs.hotkey.bind(mod, 'd', function()
     if hs.window.focusedWindow() then
         local win = hs.window.focusedWindow()
         local f = win:frame()
@@ -50,10 +50,10 @@ hs.hotkey.bind(hyper, 'd', function()
 end)
 
 -----------------------------------------------
--- hyper+g right one half window
+-- mod+g right one half window
 -----------------------------------------------
 
-hs.hotkey.bind(hyper, 'g', function()
+hs.hotkey.bind(mod, 'g', function()
     if hs.window.focusedWindow() then
         local win = hs.window.focusedWindow()
         local f = win:frame()
@@ -71,10 +71,10 @@ hs.hotkey.bind(hyper, 'g', function()
 end)
 
 -----------------------------------------------
--- hyper+f max screen size
+-- mod+f max screen size
 -----------------------------------------------
 
-hs.hotkey.bind(hyper, 'f', function()
+hs.hotkey.bind(mod, 'f', function()
     if hs.window.focusedWindow() then
         local win = hs.window.focusedWindow()
         local f = win:frame()
@@ -92,15 +92,17 @@ hs.hotkey.bind(hyper, 'f', function()
 end)
 
 -----------------------------------------------
--- hyper+i show window hints
+-- mod+i show window hints
 -----------------------------------------------
 
-hs.hotkey.bind(hyper, 'i', function()
+hs.hotkey.bind(mod, 'i', function()
     hs.hints.windowHints()
 end)
 
+-- WINDOW MANAGEMENT : Focussing
+
 --------------------------------------------------
--- hyper+up,down,left,right to switch window focus
+-- mod+up,down,left,right to switch window focus
 --------------------------------------------------
 arrow_key_bindings = {
     up = function() hs.window.focusedWindow():focusWindowNorth() end,
@@ -110,7 +112,7 @@ arrow_key_bindings = {
 }
 
 for k, f in pairs(arrow_key_bindings) do
-    hs.hotkey.bind(hyper, k, function()
+    hs.hotkey.bind(mod, k, function()
         if hs.window.focusedWindow() then
             f()
         else
